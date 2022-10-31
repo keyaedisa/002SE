@@ -1,10 +1,10 @@
-NAME="XeroLinux"
-PRETTY_NAME="XeroLinux"
-ID=XeroLinux
+NAME="002"
+PRETTY_NAME="002 Server Edition"
+ID=002SE
 ID_LIKE=arch
 BUILD_ID=rolling
 ANSI_COLOR="38;2;23;147;209"
-HOME_URL="https://xerolinux.xyz/"
-LOGO=XeroLinux
-IMAGE_ID=XeroLinux
-IMAGE_VERSION=2022.12.15
+#HOME_URL="https://xerolinux.xyz/"
+LOGO=002SE
+IMAGE_ID=002SE
+#IMAGE_VERSION=2022.12.15

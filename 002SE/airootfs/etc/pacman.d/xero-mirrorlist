@@ -1,0 +1,4 @@
+#######################################################
+
+# Direct Host From South Korea
+Server = https://mirror.funami.tech/xerolinux/$repo/$arch

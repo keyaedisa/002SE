@@ -10,9 +10,9 @@ chmod 750 /etc/sudoers.d
 chmod 750 /etc/polkit-1/rules.d
 chgrp polkitd /etc/polkit-1/rules.d
 
-echo "Copy /etc/skel to /root"
-echo "#################################"
-cp -aT /etc/skel/ /root/
+#echo "Copy /etc/skel to /root"
+#echo "#################################"
+#cp -aT /etc/skel/ /root/
 
 echo "Cleanup autologin root"
 echo "#################################"

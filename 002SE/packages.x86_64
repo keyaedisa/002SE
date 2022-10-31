@@ -7,25 +7,25 @@
 archiso
 alsa-utils
 amd-ucode
-arch-install-scripts
-archinstall
+#arch-install-scripts
+#archinstall
 b43-fwcutter
 base
 base-devel
 bind
 brltty
 btrfs-progs
-clonezilla
-cloud-init
+#clonezilla
+#cloud-init
 crda
-darkhttpd
+#darkhttpd
 ddrescue
-dhclient
-dhcpcd
+#dhclient
+#dhcpcd
 diffutils
-dmidecode
+#dmidecode
 dmraid
-dnsmasq
+#dnsmasq
 dosfstools
 e2fsprogs
 edk2-shell
@@ -46,7 +46,7 @@ irssi
 iw
 iwd
 jfsutils
-kinit
+#kinit
 kitty-terminfo
 less
 libfido2
@@ -77,8 +77,8 @@ nilfs-utils
 nmap
 ntfs-3g
 nvme-cli
-openconnect
-open-iscsi
+#openconnect
+#open-iscsi
 openssh
 openvpn
 partclone
@@ -141,6 +141,14 @@ dnsutils
 logrotate
 
 #######################################################
+###						002SE						###
+#######################################################
+caddy
+
+
+
+
+#######################################################
 ###                    XERO                         ###
 #######################################################
 
@@ -158,18 +166,18 @@ piper
 imwheel
 fprintd
 libinput
-gestures
-fingerprint-gui
+#gestures
+#fingerprint-gui
 xf86-input-void
 xf86-input-wacom
 xf86-input-evdev
-iio-sensor-proxy
-libinput-gestures
+#iio-sensor-proxy
+#libinput-gestures
 game-devices-udev
 xf86-input-vmmouse
 xf86-input-libinput
 xf86-input-synaptics
-libinput_gestures_qt
+#libinput_gestures_qt
 xf86-input-elographics
 
 ### Printers & Scanner support
@@ -180,14 +188,14 @@ scanner-support
 
 ### XeroLinux Build
 
-xerowelcome
-xero-calamares
-mhwd-xerolinux
-xero-kde-config
-xero-fix-scripts
-calamares-config
-mhwd-db-xerolinux
-xerolinux-mirrorlist
+#xerowelcome
+#xero-calamares
+#mhwd-xerolinux
+#xero-kde-config
+#xero-fix-scripts
+#calamares-config
+#mhwd-db-xerolinux
+#xerolinux-mirrorlist
 
 #######################################################
 ###      PACKAGES THAT STAY AFTER INSTALLATION      ###
@@ -235,13 +243,13 @@ gtk-update-icon-cache
 
 ### Applications
 
-jq
-gmrun
-figlet
-okular
-flatseal
-numlockx
-lm_sensors
+#jq
+#gmrun
+#figlet
+#okular
+#flatseal
+#numlockx
+#lm_sensors
 
 ### Bat to replace cat
 
@@ -262,17 +270,17 @@ adobe-source-sans-pro-fonts
 ### Theme Tools
 
 neofetch
-lightly-git
-latte-dock-git
-kwin-bismuth-bin
-kwin-effects-burn-my-windows-git
-kwin-effects-sliding-notifications
+#lightly-git
+#latte-dock-git
+#kwin-bismuth-bin
+#kwin-effects-burn-my-windows-git
+#kwin-effects-sliding-notifications
 
 ### Rice/Config Related
 
-kde-wallpapers
-layan-kde-git
-tela-purple-icon-theme-git
+#kde-wallpapers
+#layan-kde-git
+#tela-purple-icon-theme-git
 
 ### System Utilities
 
@@ -450,7 +458,7 @@ python-websockets
 ### Browser
 
 firefox
-firefox-ublock-origin
+#firefox-ublock-origin
 
 ### cursors
 
@@ -497,55 +505,55 @@ virtualbox-guest-utils
 
 ### Essentials
 
-kwin
-sddm
-milou
-breeze
-kcrash
-drkonqi
-kgamma5
-kscreen
-khotkeys
-sddm-kcm
-kmenuedit
-ksysguard
-bluedevil
-powerdevil
-libkscreen
-kinfocenter
-ksshaskpass
-kdecoration
-kglobalaccel
-libksysguard
-kde-dev-utils
-kscreenlocker
-xdg-user-dirs
-knotifications
-systemsettings
-kde-gtk-config
-packagekit-qt5
-polkit-kde-agent
-kactivitymanagerd
-kdenetwork-filesharing
-xdg-desktop-portal-kde
-
+#kwin
+#sddm
+#milou
+#breeze
+#kcrash
+#drkonqi
+#kgamma5
+#kscreen
+#khotkeys
+#sddm-kcm
+#kmenuedit
+#ksysguard
+#bluedevil
+#powerdevil
+#libkscreen
+#kinfocenter
+#ksshaskpass
+#kdecoration
+#kglobalaccel
+#libksysguard
+#kde-dev-utils
+#kscreenlocker
+#xdg-user-dirs
+#knotifications
+#systemsettings
+#kde-gtk-config
+#packagekit-qt5
+#polkit-kde-agent
+#kactivitymanagerd
+#kdenetwork-filesharing
+#xdg-desktop-portal-kde
+#
 ### Plasma Stuff
 
-plasma-nm
-plasma-pa
-plasma-vault
-plasma-desktop
-plasma-framework
-plasma-workspace
-plasma-integration
-plasma-systemmonitor
-plasma-browser-integration
-
+#plasma-nm
+#plasma-pa
+#plasma-vault
+#plasma-desktop
+#plasma-framework
+#plasma-workspace
+#plasma-integration
+#plasma-systemmonitor
+#plasma-browser-integration
+#
 ### Others
 
-ocs-url
-systemd-kcm
-pacman-contrib
+#ocs-url
+#systemd-kcm
+#pacman-contrib
 
 ### KDE Wayland
 
@@ -562,85 +570,85 @@ pacman-contrib
 
 ## Utilities
 
-ark
-kgpg
-kate
-kfind
-kcalc
-dolphin
-kdialog
-konsole
-kalendar
-kmousetool
-ksystemlog
-khelpcenter
-kwallet-pam
-markdownpart
-kwalletmanager
-
+#ark
+#kgpg
+#kate
+#kfind
+#kcalc
+#dolphin
+#kdialog
+#konsole
+#kalendar
+#kmousetool
+#ksystemlog
+#khelpcenter
+#kwallet-pam
+#markdownpart
+#kwalletmanager
+#
 ## Networking
 
-kdeconnect
-kio-zeroconf
-kdenetwork-filesharing
-signon-kwallet-extension
+#kdeconnect
+#kio-zeroconf
+#kdenetwork-filesharing
+#signon-kwallet-extension
 
 ### Graphics
 
-svgpart
-gwenview
-spectacle
-kcolorchooser
-kdeplasma-addons
-kwin-scripts-forceblur
-kdegraphics-thumbnailers
-
+#svgpart
+#gwenview
+#spectacle
+#kcolorchooser
+#kdeplasma-addons
+#kwin-scripts-forceblur
+#kdegraphics-thumbnailers
+#
 ## KDE-SDK
 
-lokalize
-dolphin-plugins
-kdesdk-thumbnailers
-
+#lokalize
+#dolphin-plugins
+#kdesdk-thumbnailers
+#
 ## Complements
 
-yakuake
-kio-gdrive
-xsettingsd
-systemdgenie
-gnome-keyring
-keditbookmarks
-
+#yakuake
+#kio-gdrive
+#xsettingsd
+#systemdgenie
+#gnome-keyring
+#keditbookmarks
+#
 ## QT5 packages
 
-qt5-3d
-qt5-svg
-qt5-base
-qt5-tools
-qt5-scxml
-qt5-lottie
-qt5-charts
-qt6-5compat
-qt5-sensors
-qt5-webview
-qt5-quick3d
-qt5-x11extras
-qt5-serialbus
-qt5-webengine
-qt5-datavis3d
-qt5-websockets
-qt5-webchannel
-qt5-serialport
-qt5-multimedia
-qt5-declarative
-qt5-networkauth
-qt5-xmlpatterns
-qt5-imageformats
-qt5-connectivity
-qt5-translations
-qt5-quicktimeline
-qt5-remoteobjects
-qt5-virtualkeyboard
-
+#qt5-3d
+#qt5-svg
+#qt5-base
+#qt5-tools
+#qt5-scxml
+#qt5-lottie
+#qt5-charts
+#qt6-5compat
+#qt5-sensors
+#qt5-webview
+#qt5-quick3d
+#qt5-x11extras
+#qt5-serialbus
+#qt5-webengine
+#qt5-datavis3d
+#qt5-websockets
+#qt5-webchannel
+#qt5-serialport
+#qt5-multimedia
+#qt5-declarative
+#qt5-networkauth
+#qt5-xmlpatterns
+#qt5-imageformats
+#qt5-connectivity
+#qt5-translations
+#qt5-quicktimeline
+#qt5-remoteobjects
+#qt5-virtualkeyboard
+#
 # QT6 packages
 
 #qt6-shadertools

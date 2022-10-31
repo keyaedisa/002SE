@@ -1,140 +1,239 @@
-#!/bin/bash
+f#!/bin/bash
 
 # Written by Keyaedisa
 # Website in the works
 
-source ../misc/bashFormatting
+source "$(dirname "${BASH_SOURCE[0]}")/../misc/.bashFormatting"
 
-echo $fgMagenta
-xUnicode 2730 49
-echo $txReset
-echo "Step 1: Getting ready to build"
-echo $fgMagenta
-xUnicode 2730 49
-echo $txReset
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+sudoCheck=0
+while [ $sudoCheck != 1 ]; do
+echo "This script ${txUnderline}${txBold}needs${txReset} to be run as ${txUnderline}${fgRed}sudo${txReset}. Did you run as ${fgRed}${txUnderline}sudo${txReset} (${fgGreen}y${txReset}/${fgRed}n${txReset})?"
+read sudoCheckAns
+	case $sudoCheckAns in
+		y | yes | Y | Yes | YES )
+			sudoCheck=1
+			echo "Okay, ${fgCyan}continuing${txReset}!"
+			sleep 1.3
+			;;
+		n | no | N | No | NO )
+			echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+			echo "${txBold}Self destructing${txReset}. Next time run as ${txUnderline}${fgRed}sudo${txReset}"
+			echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+			exit
+			;;
+		*)
+			echo "${fgRed}Invalid${txReset} response. ${txUnderline}Try again.${txReset}"
+			echo
+			;;
+	esac
+done
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+echo "${fgCyan}Step 1${txReset}: Getting ready to ${fgCyan}build!"
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+echo "What is the name of your ${fgCyan}archiso${txReset} profile?"
+read archisoProfile
 
-	[ -d ../misc ] || mkdir ../misc
-	buildFolder=../misc/002SE-build
-	outFolder=../misc/002SE-iso
-	profile=../002SE
-	
-echo $fgMagenta
-xUnicode 2730 49
-echo $txReset
-echo "Step 2: Making sure you have latest archiso. Enter password if prompted"
-echo $fgMagenta
-xUnicode 2730 49
-echo $txReset
+	[ -d ../ignore ] || mkdir ../ignore
+	[ -d ../ignore/${archisoProfile}-isos ] || mkdir ../ignore/${archisoProfile}-isos
+	buildFolder=../ignore/${archisoProfile}-build
+	outFolder=../ignore/${archisoProfile}-isos
+	profile=../$archisoProfile
+	profiledef=../$archisoProfile/profiledef.sh
+	user=$(whoami)
 
-	sleep 2
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+echo "${fgCyan}Step 2${txReset}: Making sure you have latest ${fgCyan}archiso!"
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+
+	sleep 1.3
 	sudo pacman -Su archiso --noconfirm
 
-echo $fgMagenta
-xUnicode 2730 49
-echo $txReset
-echo "Step 3: All done. Getting ready to build the iso"
-echo "Will be deleting previous work folder if one exists"
-echo $fgMagenta
-xUnicode 2730 49
-echo $txReset
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+echo "${fgCyan}Step 3${txReset}:Getting ready to ${fgCyan}build the iso!${txReset}"
+echo "Will be ${txUnderline}${fgRed}deleting${txReset} previous work folder ${txUnderline}if${txReset} one exists!"
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
 
 	if [[ -d $buildFolder ]]; then
 		 sudo rm -rf $buildFolder
 	fi
 
-echo $fgMagenta
-xUnicode 2730 49
-echo $txReset
-echo "Step 3.5: Updating all references, including profiledef.sh"
-echo $fgMagenta
-xUnicode 2730 49
-echo $txReset
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+echo "${fgCyan}Step 3.5${txReset}: Updating ${fgCyan}references${txReset} and ${fgCyan}profiledef.sh${txReset}!"
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
 
-	currentName=$(sed -n "s/(^iso_name=)//p" ../002SE/profiledef.sh | grep -o '[[:alnum:]]*')
-	currentPublisher=$(sed -n 's/\(^iso_publisher=\)//p' ../002SE/profiledef.sh | sed 's/\([^"]*\)./\1/gi')
+	currentName=$(sed -n 's/\(^iso_name=\)//p' $profiledef | sed 's/\([^"]*\)./\1/g')
+	currentLabel=$(sed -n 's/\(^iso_label=\)//p' $profiledef | sed 's/\([^"]*\)./\1/g')
+	currentPublisher=$(sed -n 's/\(^iso_publisher=\)//p' $profiledef | sed 's/\([^"]*\)./\1/g')
+	currentVersion=$(sed -n 's/\(^iso_version=\)//p' $profiledef | sed 's/\([^"]*\)./\1/g')
+	currentApplication=$(sed -n 's/\(^iso_application=\)//p' $profiledef | sed 's/\([^"]*\)./\1/g')
 
-	echo "Current ISO name is $currentName. Want to rename?"
-	read -n 3 YN
-	case $YN in
-		y | yes | Y | Yes )
-			echo
-			echo "Okay. What do you want to name this iso?"
-			read newName
-			echo "Okay. This ISO will now be named $newName"
-
- 			echo "Changing all references in /etc/dev-rel/"
- 			echo
- 			sed -i 's/'$currentName'/'$newName'/gi' $buildFolder/archiso/airootfs/etc/dev-rel
-
-			echo "Changing all references in profiledef.sh"
-			sed -i 's/'$currentName'/'$newName'/gi' ../002SE/profiledef.sh
-			;;
-		n | no | N | No )
-			echo
-			echo "Okay. ISO name will remain $currentName"
-			;;
-		* )
-			echo
-			kum = 0
-			if [$kum != 3]; do
-			echo "Not a valid response. Try again"
-			kum=$(($kum + 1))
-			else
-			echo "No way you've messed this up 3 times :/"
-			kum=0
-			fi
-			;;
-	esac
+updateProfiledef="0"
+while [ $updateProfiledef != 1 ]; do
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+echo "Below are the ${txUnderline}current${txReset} relevant values in your ${fgCyan}profiledef.sh${txReset}."
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+sed -n '4,8p' $profiledef
+sleep 1.3
+easterEgg="0"
+echo "Would you like to change any of them? (${fgGreen}y${txReset}/${fgRed}n${txReset})"
+read YN
+case $YN in
+y | yes | Y | Yes | YES )
+	finished="0"
+	round="0"
+	while [ $finished != 1 ]; do
+	if [[ $round == 0 ]]; then
+	echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+	echo "Okay, what ${fgCyan}ISO detail${txReset} would you like to ${txBold}change${txReset}?"
+	sed -n '4,8p' $profiledef
+	echo "Choose an option ${txBold}${fgCyan}1-5${txReset} to ${txUnderline}modify${txReset}. Enter ${fgCyan}6${txReset} ${txBold}or${txReset} ${fgCyan}Finished${txReset} when ${txUnderline}finished${txReset}!"
+	echo "${fgCyan}1${txReset}:Name , ${fgCyan}2${txReset}:Label , ${fgCyan}3${txReset}:Publisher , ${fgCyan}4${txReset}:Application , ${fgCyan}5${txReset}:Version , ${fgRed}6${txReset}:${fgRed}Finished${txReset}!"
+	round="1"
+	read selection
 	echo
-	echo "Current publisher is $currentPublisher. Want to change?"
-	read -n 3 YN
-	case $YN in
-		y | yes | Y | Yes )
-			echo
-			echo "Okay. Who should be credited as publisher?"
-			read newPublisher
-			echo "Okay. This iso will now be named $newName"
-
-			echo "Changing all references in profiledef.sh"
-			sed -i 's/'$currentPublisher'/'$newPublisher'/gi' ../002SE/profiledef.sh
-			;;
-		n | no | N | No )
-			echo
-			echo "Okay. ISO Publisher will remain $currentPublisher"
-			;;
-		* )
-			echo
-			kum = 0
-			if [$kum != 3]; do
-			echo "Not a valid response. Try again"
-			kum=$(($kum + 1))
-			else
-			echo "No way you've messed this up 3 times :/"
-			kum=0
-			fi
-			;;
+	else
+	currentName=$(sed -n 's/\(^iso_name=\)//p' $profiledef | sed 's/\([^"]*\)./\1/g')
+	currentLabel=$(sed -n 's/\(^iso_label=\)//p' $profiledef | sed 's/\([^"]*\)./\1/g')
+	currentPublisher=$(sed -n 's/\(^iso_publisher=\)//p' $profiledef | sed 's/\([^"]*\)./\1/g')
+	currentVersion=$(sed -n 's/\(^iso_version=\)//p' $profiledef | sed 's/\([^"]*\)./\1/g')
+	currentApplication=$(sed -n 's/\(^iso_application=\)//p' $profiledef | sed 's/\([^"]*\)./\1/g')
+	echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+	echo "${txUnderline}Current${txReset} values in ${fgCyan}profiledef.sh${txReset}!"
+	echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+	sed -n '4,8p' $profiledef
+	echo "What to modify ${fgCyan}next${txReset}?"
+	echo "Choose an option ${txBold}${fgCyan}1-5${txReset} to modify. Enter ${fgCyan}6${txReset} ${txBold}or${txReset} ${fgCyan}Finished${txReset} when ${txUnderline}finished${txReset}!"
+	echo "${fgCyan}1${txReset}:Name , ${fgCyan}2${txReset}:Label , ${fgCyan}3${txReset}:Publisher , ${fgCyan}4${txReset}:Application , ${fgCyan}5${txReset}:Version , ${fgRed}6${txReset}:${fgRed}Finished${txReset}!"
+	read selection
+	echo
+	fi
+	case $selection in
+	1 | Name | name | NAME)
+		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		echo "${txUnderline}Current${txReset} ${fgCyan}ISO Name${txReset} is ${currentName}. What would you like to ${txBold}rename${txReset}?"
+		read newName
+		echo "Oki. This ${fgCyan}ISO${txReset} will now be named ${fgCyan}${newName}${txReset}!"
+		echo
+		sleep 1.3
+		isoCodename=$(sed -n "s/\(^ISO_CODENAME=\)//p" $profile/airootfs/etc/dev-rel)
+		awk -v nN="$newName" -v iC="$isoCodename" 'NR==2, NR==2 {sub(iC, nN)}1' $profile/airootfs/etc/dev-rel >> dev-rel
+		mv dev-rel $profile/airootfs/etc/dev-rel
+		sudo chown $user $profile/airootfs/etc/dev-rel
+		awk -v cN="$currentName" -v nN="$newName" 'NR==4, NR==4 {sub(cN, nN)}1' $profiledef >> profiledef
+		mv profiledef $profiledef
+		sudo chown $user $profiledef
+		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		;;
+	2 | Label | LABEL | label )
+		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		echo "${txUnderline}Current${txReset} ${fgCyan}ISO Label${txReset} is ${txUnderline}${currentLabel}${txReset}. What would you like to ${txBold}relabel${txReset}?"
+		read newLabel
+		echo
+		echo "Oki. This ${fgCyan}ISO${txReset} will now be labeled ${fgCyan}${newLabel}${txReset}!"
+		echo
+		sleep 1.3
+		awk -v cL="$currentLabel" -v nL="$newLabel" 'NR==5, NR==5 {sub(cL, nL)}1' $profiledef >> profiledef
+		mv profiledef $profiledef
+		sudo chown $user $profiledef
+		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		;;
+	3 | Publisher | PUBLISHER | publisher )
+		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		echo "${txUnderline}Current${txReset} ${fgCyan}ISO Publisher${txReset} is ${txUnderline}${currentPublisher}${txReset}. Who should be ${txBold}credited instead${txReset}?"
+		read newPublisher
+		echo "Oki. This ${fgCyan}ISO${txReset} will now be credited to ${fgCyan}${newPublisher}${txReset}!"
+		echo
+		sleep 1.3
+		awk -v cP="$currentPublisher" -v nP="$newPublisher" 'NR==6, NR==6 {sub(cP, nP)}1' $profiledef >> profiledef
+		mv profiledef $profiledef
+		sudo chown $user $profiledef
+		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		;;
+	4 | Application | APPLICATION | application )
+		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		echo "${txUnderline}Current${txReset} ${fgCyan}ISO Application${txReset} is ${txUnderline}${currentApplication}${txReset}. What should be the ${txBold}application instead${txReset}?"
+		read newApplication
+		echo "Oki. This ${fgCyan}ISO's application${txReset} will now be ${fgCyan}${newApplication}${txReset}!"
+		echo
+		sleep 1.3
+		awk -v cA="$currentApplication" -v nA="$newApplication" 'NR==7, NR==7 {sub(cA, nA)}1' $profiledef >> profiledef
+		mv profiledef $profiledef
+		sudo chown $user $profiledef
+		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		;;
+	5 | Version | VERSION | version )
+		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		echo "${txUnderline}Current${txReset} ${fgCyan}ISO version${txReset} is ${txUnderline}${currentVersion}${txReset}. What should be the ${txBold}version instead${txReset}?"
+		read newVersion
+		echo "Oki. This ${fgCyan}ISO's version${txReset} will be set to ${fgCyan}${newVersion}${txReset}!"
+		echo
+		sleep 1.3
+		awk -v cV="$currentVersion" -v nV="$newVersion" 'NR==8, NR==8 {sub(cV, nV)}1' $profiledef >> profiledef
+		mv profiledef $profiledef
+		sudo chown $user $profiledef
+		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		;;
+	6 | FINISHED | Finished | finished )
+		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		echo "Awesome! Let's ${fgCyan}continue${txReset}!"
+		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		finished="1"
+		easterEgg="0"
+		;;
+	* )
+		if [[ $easterEgg != 3 ]]; then
+			echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+			echo "${fgRed}Invalid${txReset} response. ${txUnderline}Try again.${txReset}"
+			echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+			easterEgg=$(($easterEgg + 1))
+		else
+			echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+			echo "No ${txBold}way${txReset} you messed this up ${txBold}${fgRed}$easterEgg${txReset} times!"
+			echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+		fi
+		;;
 	esac
-echo "Adding time to /etc/dev-rel"
-dateBuild=$(date -d now)
-echo "Iso build on : "$dateBuild
-sudo sed -i "s/\(^ISO_BUILD=\).*/\1$date_build/" ../002SE/archiso/airootfs/etc/dev-rel
+	done
+	updateProfiledef="1"
+	;;
+n | N | no | No | NO )
+	echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+	echo "Oki. Moving on!"
+	echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+	updateProfiledef="1"
+	easterEgg="0"
+	;;
+* )
+	if [[ $easterEgg != 3 ]]; then
+		echo "${fgRed}Invalid${txReset} response. ${txUnderline}Try again.${txReset}"
+		easterEgg=$(($easterEgg + 1))
+	else
+		echo "No ${txBold}way${txReset} you messed this up ${txBold}${fgRed}$easterEgg${txReset} times!"
+	fi
+	;;
+esac
+done
 
-echo $fgMagenta
-xUnicode 2730 49
-echo $txReset
-echo
-echo "Step 4: Time to build ISO. This will take a while. Go grab a drink or something"
-echo $fgMagenta
-xUnicode 2730 49
-echo $txReset
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+echo "Adding ${fgCyan}build time${txReset} to /etc/dev-rel"
+dateBuild=$(date -d now)
+echo "ISO built on : "$dateBuild
+sed -i "s/\(^ISO_BUILD=\).*/\1$date_build/" $profile/airootfs/etc/dev-rel
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+echo "${fgCyan}Step 4${txReset}: Time to build ${fgCyan}ISO${txReset}. This ${txUnderline}will${txReset} take a while. Go grab a drink or something!"
+echo "Build ${fgCyan}starts${txReset} in ${fgRed}5 seconds!"
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+sleep 5
 
 sudo mkarchiso -v -w $buildFolder -o $outFolder $profile
 
-echo $fgMagenta
-xUnicode 2730 49
-echo $txReset
-echo
-echo "DONE! Look in misc/ for your build and iso folder"
-echo $fgMagenta
-xUnicode 2730 49
-echo $txReset
+sudo chown -R $user $buildFolder
+sudo chown -R $user $outFolder
+
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
+echo "${fgCyan}Done!${txReset} Look in ${txBold}ignore/${txReset} for your ${txUnderline}build and iso folder${txReset}!"
+echo "Made with ${fgRed}love${txReset} by your ${fgMagenta}favorite genderless${txReset} being ${txBold}${txUnderline}${txStandout}${fgMagenta}Keyaedisa${txReset}${txBold}!${txReset}"
+echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
