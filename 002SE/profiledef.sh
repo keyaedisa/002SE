@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="002 Server Edition Alpha"
-iso_label="002SE Alpha"
+iso_name="002-Server-Edition-Alpha"
+iso_label="002SE-Alpha"
 iso_publisher="Keyaedisa"
 iso_application="002SE Live/Rescue CD"
-iso_version="0.0.1a"
+iso_version="$(date +%Y.%m)"
 install_dir="arch"
 buildmodes=('iso')
 bootmodes=('bios.syslinux.mbr' 'bios.syslinux.eltorito'
