@@ -31,7 +31,8 @@ echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
 echo "${fgCyan}Step 1${txReset}: Getting ready to ${fgCyan}build!"
 echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
 echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
-read -p "What is the name of your ${fgCyan}archiso${txReset} profile? " archisoProfile
+read -p "Please enter the name of your ${fgCyan}archiso${txReset} profile: "
+archisoProfile
 
 	[ -d ../ignore ] || mkdir ../ignore
 	[ -d ../ignore/${archisoProfile}-isos ] || mkdir ../ignore/${archisoProfile}-isos
@@ -118,12 +119,12 @@ y | yes | Y | Yes | YES )
 	echo "What to modify ${fgCyan}next${txReset}?"
 	echo "Choose an option ${txBold}${fgCyan}1-5${txReset} to modify. Enter ${fgCyan}6${txReset} ${txBold}or${txReset} ${fgCyan}Finished${txReset} when ${txUnderline}finished${txReset}!"
 	echo
-	read -p "${fgCyan}1${txReset}:Name , ${fgCyan}2${txReset}:Label , ${fgCyan}3${txReset}:Publisher , ${fgCyan}4${txReset}:Application , ${fgCyan}5${txReset}:Version , ${fgRed}6${txReset}:${fgRed}Finished${txReset}! " selection
+	read -p "${fgCyan}1${txReset}:Name , ${fgCyan}2${txReset}:Label , ${fgCyan}3${txReset}:Publisher , ${fgCyan}4${txReset}:Application , ${fgCyan}5${txReset}:Version , ${fgRed}6${txReset}:${fgRed}Finished${txReset}! : " selection
 	fi
 	case $selection in
 	1 | Name | name | NAME)
 		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
-		read -p "${txUnderline}Current${txReset} ${fgCyan}ISO Name${txReset} is ${currentName}. What would you like to ${txBold}rename${txReset}? " newName
+		read -p "${txUnderline}Current${txReset} ${fgCyan}ISO Name${txReset} is ${currentName}. What would you like to ${txBold}rename${txReset}? : " newName
 		echo
 		echo "Oki. This ${fgCyan}ISO${txReset} will now be named ${fgCyan}${newName}${txReset}!"
 		isoCodename=$(sed -n "s/\(^ISO_CODENAME=\)//p" $profile/airootfs/etc/dev-rel)
@@ -135,7 +136,7 @@ y | yes | Y | Yes | YES )
 		;;
 	2 | Label | LABEL | label )
 		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
-		read -p "${txUnderline}Current${txReset} ${fgCyan}ISO Label${txReset} is ${txUnderline}${currentLabel}${txReset}. What would you like to ${txBold}relabel${txReset}? " newLabel
+		read -p "${txUnderline}Current${txReset} ${fgCyan}ISO Label${txReset} is ${txUnderline}${currentLabel}${txReset}. What would you like to ${txBold}relabel${txReset}? : " newLabel
 		echo
 		echo "Oki. This ${fgCyan}ISO${txReset} will now be labeled ${fgCyan}${newLabel}${txReset}!"
 		awk -v cL="$currentLabel" -v nL="$newLabel" 'NR==5, NR==5 {sub(cL, nL)}1' $profiledef >> profiledef
@@ -144,7 +145,7 @@ y | yes | Y | Yes | YES )
 		;;
 	3 | Publisher | PUBLISHER | publisher )
 		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
-		read -p "${txUnderline}Current${txReset} ${fgCyan}ISO Publisher${txReset} is ${txUnderline}${currentPublisher}${txReset}. Who should be ${txBold}credited instead${txReset}? " newPublisher
+		read -p "${txUnderline}Current${txReset} ${fgCyan}ISO Publisher${txReset} is ${txUnderline}${currentPublisher}${txReset}. Who should be ${txBold}credited instead${txReset}? : " newPublisher
 		echo
 		echo "Oki. This ${fgCyan}ISO${txReset} will now be credited to ${fgCyan}${newPublisher}${txReset}!"
 		awk -v cP="$currentPublisher" -v nP="$newPublisher" 'NR==6, NR==6 {sub(cP, nP)}1' $profiledef >> profiledef
@@ -153,7 +154,7 @@ y | yes | Y | Yes | YES )
 		;;
 	4 | Application | APPLICATION | application )
 		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
-		read -P "${txUnderline}Current${txReset} ${fgCyan}ISO Application${txReset} is ${txUnderline}${currentApplication}${txReset}. What should be the ${txBold}application instead${txReset}? " newApplication
+		read -P "${txUnderline}Current${txReset} ${fgCyan}ISO Application${txReset} is ${txUnderline}${currentApplication}${txReset}. What should be the ${txBold}application instead${txReset}? : " newApplication
 		echo
 		echo "Oki. This ${fgCyan}ISO's application${txReset} will now be ${fgCyan}${newApplication}${txReset}!"
 		awk -v cA="$currentApplication" -v nA="$newApplication" 'NR==7, NR==7 {sub(cA, nA)}1' $profiledef >> profiledef
@@ -163,7 +164,7 @@ y | yes | Y | Yes | YES )
 	5 | Version | VERSION | version )
 		echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
 		echo "${fgRed}Warning${txReset}: do ${txStandout}${fgRed}NOT${txReset} try and enter any combination of '$\(date)'! It does not like! Bug me enough and I'll consider fixing it."
-		read -p "${txUnderline}Current${txReset} ${fgCyan}ISO version${txReset} is ${txUnderline}${currentVersion}${txReset}. What should be the ${txBold}version instead${txReset}? " newVersion
+		read -p "${txUnderline}Current${txReset} ${fgCyan}ISO version${txReset} is ${txUnderline}${currentVersion}${txReset}. What should be the ${txBold}version instead${txReset}? : " newVersion
 		echo
 		echo "Oki. This ${fgCyan}ISO's version${txReset} will be set to ${fgCyan}${newVersion}${txReset}!"
 		awk -v cV="$currentVersion" -v nV="$newVersion" 'NR==8, NR==8 {sub(cV, nV)}1' $profiledef >> profiledef
