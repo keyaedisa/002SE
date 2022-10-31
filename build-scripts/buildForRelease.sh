@@ -1,4 +1,4 @@
-f#!/bin/bash
+#!/bin/bash
 
 # Written by Keyaedisa
 # Website in the works
