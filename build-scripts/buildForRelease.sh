@@ -75,6 +75,7 @@ echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
 echo "Below are the ${txUnderline}current${txReset} relevant values in your ${fgCyan}profiledef.sh${txReset}."
 echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
 sed -n '4,8p' $profiledef
+echo
 sleep 1.3
 easterEgg="0"
 echo "Would you like to change any of them? (${fgGreen}y${txReset}/${fgRed}n${txReset})"
@@ -88,6 +89,7 @@ y | yes | Y | Yes | YES )
 	echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
 	echo "Okay, what ${fgCyan}ISO detail${txReset} would you like to ${txBold}change${txReset}?"
 	sed -n '4,8p' $profiledef
+	echo
 	echo "Choose an option ${txBold}${fgCyan}1-5${txReset} to ${txUnderline}modify${txReset}. Enter ${fgCyan}6${txReset} ${txBold}or${txReset} ${fgCyan}Finished${txReset} when ${txUnderline}finished${txReset}!"
 	echo "${fgCyan}1${txReset}:Name , ${fgCyan}2${txReset}:Label , ${fgCyan}3${txReset}:Publisher , ${fgCyan}4${txReset}:Application , ${fgCyan}5${txReset}:Version , ${fgRed}6${txReset}:${fgRed}Finished${txReset}!"
 	round="1"
@@ -103,6 +105,7 @@ y | yes | Y | Yes | YES )
 	echo "${txUnderline}Current${txReset} values in ${fgCyan}profiledef.sh${txReset}!"
 	echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
 	sed -n '4,8p' $profiledef
+	echo
 	echo "What to modify ${fgCyan}next${txReset}?"
 	echo "Choose an option ${txBold}${fgCyan}1-5${txReset} to modify. Enter ${fgCyan}6${txReset} ${txBold}or${txReset} ${fgCyan}Finished${txReset} when ${txUnderline}finished${txReset}!"
 	echo "${fgCyan}1${txReset}:Name , ${fgCyan}2${txReset}:Label , ${fgCyan}3${txReset}:Publisher , ${fgCyan}4${txReset}:Application , ${fgCyan}5${txReset}:Version , ${fgRed}6${txReset}:${fgRed}Finished${txReset}!"
