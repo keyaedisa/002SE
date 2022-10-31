@@ -31,8 +31,7 @@ echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
 echo "${fgCyan}Step 1${txReset}: Getting ready to ${fgCyan}build!"
 echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
 echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
-read -p "Please enter the name of your ${fgCyan}archiso${txReset} profile: "
-archisoProfile
+read -p "Please enter the name of your ${fgCyan}archiso${txReset} profile: " archisoProfile
 
 	[ -d ../ignore ] || mkdir ../ignore
 	[ -d ../ignore/${archisoProfile}-isos ] || mkdir ../ignore/${archisoProfile}-isos
