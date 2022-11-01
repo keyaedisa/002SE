@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="newKaisoEXP"
-iso_label="newKaisoEXP_0.7e"
-iso_publisher="keyaedisa <https://twitter.com/keyaedisa>"
-iso_application="newKaiEXP installer"
-iso_version="0.7e"
+iso_name="002SE Alpha"
+iso_label="002 Server Edition Alpha"
+iso_publisher="keyaedisa <https://github.com/keyaedisa>"
+iso_application="002SE installer"
+iso_version="0.0.1a"
 install_dir="newKaiEXP"
 buildmodes=('iso')
 bootmodes=('bios.syslinux.mbr' 'bios.syslinux.eltorito' 'uefi-x64.systemd-boot.esp' 'uefi-x64.systemd-boot.eltorito')
