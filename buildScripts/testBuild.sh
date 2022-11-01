@@ -42,7 +42,7 @@ echo "Will be ${txUnderline}${fgRed}deleting${txReset} previous work folder ${tx
 echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
 
 	if [[ -d $buildFolder ]]; then
-		 rm -rf $buildFolder
+		sudo rm -rf $buildFolder
 	fi
 
 echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
