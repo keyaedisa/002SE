@@ -2,6 +2,9 @@
 # home for aliases
 #
 
+# start ssh-agent
+alias startsshagent='eval "$(ssh-agent -s)"'
+
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
 ex ()
@@ -104,10 +107,6 @@ alias traceme='traceroute github.com'
 
 #hardware info --short
 alias hw='hwinfo --short'
-
-#youtube-dl
-alias yta-best="yt-dlp --extract-audio --audio-format best "
-alias ytv-best="yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --merge-output-format mp4 "
 
 #GiT  command
 alias gc='git clone '
