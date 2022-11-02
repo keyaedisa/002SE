@@ -42,8 +42,12 @@ systemctl enable systemd-networkd systemd-resolved polkit iwd
 mv nanorc /etc/
 echo "installing yay"
 echo
-#mv container /home/$NEWUSR/
+mv container /home/$NEWUSR/
 cd /home/$NEWUSR
+mkdir .config
+mkdir .config/nano
+cp /etc/nanorc .config/nano/
+mv container/nanorc.nanorc /usr/share/nano-syntax-highlighting/
 sudo -u $NEWUSR git clone https://aur.archlinux.org/yay.git
 cd yay
 sudo -u $NEWUSR makepkg -si --noconfirm
