@@ -124,6 +124,7 @@ xl2tpd
 zsh
 
 ## 002SE
+pacstrap
 zsh-autosuggestions
 zsh-completions
 zsh-doc

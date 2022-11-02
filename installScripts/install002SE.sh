@@ -84,7 +84,7 @@ pacstrap /mnt linux-headers
 pacstrap /mnt broadcom-wl-dkms
 pacstrap /mnt dialog efibootmgr git grub intel-ucode iw iwd man-db man-pages nano openssh polkit reflector texinfo xfsprogs
 pacstrap /mnt xorg-server xorg-xfontsel xorg-xrandr xorg-xsetroot
-pacstrap /mnt nano-syntax-highlighting pipewire pipewire-pulse wireplumber xf86-video-intel
+pacstrap /mnt caddy nano-syntax-highlighting pipewire pipewire-pulse wireplumber xf86-video-intel
 echo "done"
 echo
 echo "generating fstab"
@@ -98,7 +98,7 @@ echo "preparing post install and chroot"
 echo
 cp -r /etc/systemd/network /mnt/
 cp /etc/sudoers.d /mnt/
-#cp -r container /mnt/
+cp -r container /mnt/
 cp /etc/nanorc /mnt/
 cp chroot.bash /mnt/
 chmod +x /mnt/chroot.bash

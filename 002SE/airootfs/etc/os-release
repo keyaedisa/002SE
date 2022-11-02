@@ -1,0 +1,10 @@
+NAME="002 Server Edition"
+PRETTY_NAME="002 Server Edition"
+ID=002SE
+ID_LIKE=arch
+BUILD_ID=rolling
+ANSI_COLOR="38;2;23;147;209"
+HOME_URL="https://github.com/keyaedisa/002SE"
+LOGO=002SE
+IMAGE_ID=002SE
+IMAGE_VERSION=2022.12.15

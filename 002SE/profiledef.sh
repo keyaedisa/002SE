@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="002SE Alpha"
-iso_label="002 Server Edition Alpha"
-iso_publisher="keyaedisa <https://github.com/keyaedisa>"
-iso_application="002SE installer"
+iso_name="002SE-Alpha"
+iso_label="002SE"
+iso_publisher="keyaedisa <https://github.com/keyaedisa/002SE>"
+iso_application="002 Server Edition installer"
 iso_version="0.0.1a"
 install_dir="newKaiEXP"
 buildmodes=('iso')

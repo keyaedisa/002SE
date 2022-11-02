@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if [[ -d logs ]]; then
-	rm -rf logs
-fi
-mkdir logs
-exec >  >(tee -ia logs/stdout.log)
-exec 2> >(tee -ia logs/err.log >&2)
+#if [[ -d logs ]]; then
+#	rm -rf logs
+#fi
+#mkdir logs
+#exec >  >(tee -ia logs/stdout.log)
+#exec 2> >(tee -ia logs/err.log >&2)
 
 
 # Written by Keyaedisa
@@ -207,6 +207,6 @@ sleep 5
 sudo mkarchiso -v -w $buildFolder -o $outFolder $profile
 
 echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
-echo "${fgCyan}Done!${txReset} Look in ${txBold}${outFolder}${txReset} for your ${txUnderline}build and iso folder${txReset}!"
-echo "Made with ${fgRed}love${txReset} by your ${fgMagenta}favorite genderless${txReset} being ${txBold}${txUnderline}${txStandout}${fgMagenta}Keyaedisa${txReset}${txBold}!${txReset}"
+echo "Made with ${fgRed}love${txReset} by your ${fgMagenta}favorite genderless${txReset} being ${txUnderline}${txStandout}${fgMagenta}Keyaedisa${txReset}${txBold}!${txReset}"
+echo "${txUnderline}${fgCyan}https://twitter.com/keyaedisa${txReset}, ${txUnderline}${fgCyan}https://github.com/keyaedisa${txReset}"
 echo $fgMagenta&&xUnicode 2730 49&&echo $txReset
