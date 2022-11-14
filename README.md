@@ -1,4 +1,4 @@
-# 002SE Build Repo
+# ValenSE Build Repo
 
 Under Construction.
-![002 Server Edition!](https://i.imgur.com/jGpT1qC.jpeg)
+![Valen Server Edition!](https://i.imgur.com/jGpT1qC.jpeg)
