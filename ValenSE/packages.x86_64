@@ -2,7 +2,7 @@
 
 alsa-utils
 amd-ucode
-#arch-install-scripts
+arch-install-scripts
 #archinstall
 base
 bash
@@ -124,7 +124,6 @@ xl2tpd
 zsh
 
 ## 002SE
-pacstrap
 zsh-autosuggestions
 zsh-completions
 zsh-doc

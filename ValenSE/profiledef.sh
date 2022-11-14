@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="002SE-Alpha"
-iso_label="002SE"
-iso_publisher="keyaedisa <https://github.com/keyaedisa/002SE>"
-iso_application="002 Server Edition installer"
-iso_version="0.0.1a"
+iso_name="ValenSE-Alpha"
+iso_label="ValenSE"
+iso_publisher="keyaedisa <https://github.com/keyaedisa/ValenSE>"
+iso_application="Valen Server Edition Installer"
+iso_version="0.1a"
 install_dir="newKaiEXP"
 buildmodes=('iso')
 bootmodes=('bios.syslinux.mbr' 'bios.syslinux.eltorito' 'uefi-x64.systemd-boot.esp' 'uefi-x64.systemd-boot.eltorito')

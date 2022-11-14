@@ -1,6 +1,6 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-echo "welcome 2 002 Server Edition"
+echo "welcome 2 valen Server Edition"
 echo "with great power like this comes great responsibility.."
 echo "ensure you never fall behind"
 echo "learn all you can"
@@ -34,8 +34,9 @@ y | yes)
 		case $? in
 		 0)
 			moreKum=$?
-			echo "sending new partition table" 
-			echo -e '2048,616448,U\n,+,L\n' | sfdisk $DRIVE
+			echo "creating new partition table"
+			echo -e '2048,4096,U\n,+,L\n' | sfdisk $DRIVE
+			sgdisk -t 1:ef02 $DRIVE
 			echo "done"
 			echo "formatting partitions"
 			mkfs.fat -F 32 ${DRIVE}1
@@ -82,7 +83,7 @@ echo
 pacstrap /mnt base base-devel linux linux-firmware mkinitcpio systemd vim
 pacstrap /mnt linux-headers
 pacstrap /mnt broadcom-wl-dkms
-pacstrap /mnt dialog efibootmgr git grub intel-ucode iw iwd man-db man-pages nano openssh polkit reflector texinfo xfsprogs
+pacstrap /mnt dialog dosfstools efibootmgr git grub intel-ucode iw iwd man-db man-pages nano openssh polkit reflector texinfo xfsprogs
 pacstrap /mnt xorg-server xorg-xfontsel xorg-xrandr xorg-xsetroot
 pacstrap /mnt caddy nano-syntax-highlighting pipewire pipewire-pulse wireplumber xf86-video-intel
 echo "done"
@@ -97,7 +98,7 @@ echo
 echo "preparing post install and chroot"
 echo
 cp -r /etc/systemd/network /mnt/
-cp /etc/sudoers.d /mnt/
+cp /etc/sudoers /mnt/
 cp -r container /mnt/
 cp /etc/nanorc /mnt/
 cp chroot.bash /mnt/

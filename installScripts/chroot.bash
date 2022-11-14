@@ -38,7 +38,7 @@ echo "done"
 echo
 echo "enabling core functions"
 echo
-systemctl enable systemd-networkd systemd-resolved polkit iwd
+systemctl enable sshd systemd-networkd systemd-resolved polkit iwd
 mv nanorc /etc/
 echo "installing yay"
 echo
@@ -89,7 +89,7 @@ cd ..
 #rm -rf container
 echo "installing grub to /boot"
 echo
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+grub-install --target=i386-pc /dev/sda
 echo "done"
 echo
 echo "creating grub config"
