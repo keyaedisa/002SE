@@ -87,7 +87,7 @@ pacstrap /mnt amd-ucode dialog dosfstools git iw iwd man-db man-pages
 pacstrap /mnt nano openssh polkit reflector texinfo xfsprogs zsh
 #pacstrap /mnt xorg-server xorg-xfontsel xorg-xrandr xorg-xsetroot
 pacstrap /mnt caddy nano-syntax-highlighting syslinux wget
-pacstrap /mnt awesome-terminal-fonts powerline-fonts
+pacstrap /mnt awesome-terminal-fonts gptfdisk powerline-fonts
 pacstrap /mnt zsh-autosuggestions zsh-completions zsh-doc zsh-history-substring-search zsh-lovers
 echo "done"
 echo

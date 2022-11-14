@@ -51,10 +51,10 @@ cd /home/$NEWUSR
 mkdir .config
 mkdir .config/nano
 cp /etc/nanorc .config/nano/
-mv container/nanorc.nanorc /usr/share/nano-syntax-highlighting/
+cp -rf container/nanorc.nanorc /usr/share/nano-syntax-highlighting/
 echo "installing yay"
-sudo -u $NEWUSR git clone git clone https://aur.archlinux.org/yay.git
-cd yay
+sudo -u $NEWUSR git clone https://aur.archlinux.org/yay.git && sleep 2.0
+cd yay/
 sudo -u $NEWUSR makepkg -si --noconfirm
 cd ..
 rm -rf /home/$NEWUSR/container
@@ -96,8 +96,10 @@ rm -rf /home/$NEWUSR/container
 echo "installing and setting up syslinux"
 echo
 syslinux-install_update -i -a -m
+cd /
 mv container/syslinux /boot/
 mkinitcpio -P linux
+rm -rf container
 echo "done"
 echo
 #echo "creating grub config"
