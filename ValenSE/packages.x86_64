@@ -35,8 +35,8 @@ gnu-netcat
 gpart
 gpm
 gptfdisk
-grml-zsh-config
-#grub
+#grml-zsh-config
+grub
 hdparm
 intel-ucode
 #ipw2100-fw
@@ -123,7 +123,7 @@ xfsprogs
 xl2tpd
 zsh
 
-## 002SE
+## ValenSE
 zsh-autosuggestions
 zsh-completions
 zsh-doc

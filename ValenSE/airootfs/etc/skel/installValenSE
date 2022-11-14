@@ -26,7 +26,7 @@ y | yes)
 	while [ $moreKum != 0 ]; do
 	echo "what drive should we prepare? (enter the drive u want exactly as you see it)"
 	echo
-	fdisk -l | grep -o '\/dev\S*\:' >> shitDriveList && cat shitDriveList | tr -d \: >> perfectDriveList && cat perfectDriveList
+	fdisk -l | grep -o '/dev\S*:' >> shitDriveList && cat shitDriveList | tr -d \: >> perfectDriveList && cat perfectDriveList
 	echo
 	read DRIVE
 	echo $DRIVE >> desiredDrive
@@ -35,12 +35,13 @@ y | yes)
 		 0)
 			moreKum=$?
 			echo "creating new partition table"
-			echo -e '2048,4096,U\n,+,L\n' | sfdisk $DRIVE
+			echo -e '2048,646448,U\n,+,L\n' | sfdisk --force $DRIVE
 			sgdisk -t 1:ef02 $DRIVE
 			echo "done"
 			echo "formatting partitions"
-			mkfs.fat -F 32 ${DRIVE}1
+			mkfs.vfat ${DRIVE}1
 			mkfs.xfs -f ${DRIVE}2
+			parted /dev/sda set 1 boot on
 			echo "done"
 			rm desiredDrive shitDriveList perfectDriveList
 		 ;;
@@ -65,7 +66,7 @@ n | no)
 *)
 	echo
 	echo "that didnt make sense. y(es) or n(o) plz"
-	echo "you sure you want to install 002 Server Edition?"
+	echo "you sure you want to install Valen Server Edition?"
 	echo
 	;;
 esac
@@ -80,17 +81,19 @@ echo "root and efi mounted to /mnt & /mnt/boot respectively"
 echo 
 echo "beginning core package install.. plz b patient"
 echo
-pacstrap /mnt base base-devel linux linux-firmware mkinitcpio systemd vim
+pacstrap /mnt base base-devel linux linux-firmware mkinitcpio systemd
 pacstrap /mnt linux-headers
-pacstrap /mnt broadcom-wl-dkms
-pacstrap /mnt dialog dosfstools efibootmgr git grub intel-ucode iw iwd man-db man-pages nano openssh polkit reflector texinfo xfsprogs
-pacstrap /mnt xorg-server xorg-xfontsel xorg-xrandr xorg-xsetroot
-pacstrap /mnt caddy nano-syntax-highlighting pipewire pipewire-pulse wireplumber xf86-video-intel
+pacstrap /mnt amd-ucode dialog dosfstools git iw iwd man-db man-pages
+pacstrap /mnt nano openssh polkit reflector texinfo xfsprogs zsh
+#pacstrap /mnt xorg-server xorg-xfontsel xorg-xrandr xorg-xsetroot
+pacstrap /mnt caddy nano-syntax-highlighting syslinux wget
+pacstrap /mnt awesome-terminal-fonts powerline-fonts
+pacstrap /mnt zsh-autosuggestions zsh-completions zsh-doc zsh-history-substring-search zsh-lovers
 echo "done"
 echo
 echo "generating fstab"
 echo
-genfstab -U /mnt >> /mnt/etc/fstab
+genfstab -U -p /mnt >> /mnt/etc/fstab
 echo "done"
 echo
 echo "preparing 4 chroot"
@@ -99,6 +102,7 @@ echo "preparing post install and chroot"
 echo
 cp -r /etc/systemd/network /mnt/
 cp /etc/sudoers /mnt/
+cp /etc/locale.gen /mnt/etc/
 cp -r container /mnt/
 cp /etc/nanorc /mnt/
 cp chroot.bash /mnt/
@@ -119,6 +123,5 @@ echo "2"
 sleep 1
 echo "brb!"
 sleep 1
-umount /mnt/boot
-umount /mnt
+umount -R /mnt
 #reboot

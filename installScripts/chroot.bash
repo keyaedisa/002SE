@@ -4,19 +4,21 @@ echo "succesful chroot"
 echo
 echo "updating time zone and synchronizing system clock"
 echo
+rm -rf /etc/localtime
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
-hwclock --systohc
+hwclock --systohc --utc
+echo "KEYMAP=us" >> /etc/vconsole.conf
 #timedatectl set-timezone America/New_York
 echo "generating locales"
 echo
 locale-gen
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo
 echo "done"
 echo
 echo "updating hostname"
 echo
-echo "newKai" >> /etc/hostname
+echo "ValenSE" >> /etc/hostname
 echo
 echo "setting up networkd"
 echo
@@ -28,30 +30,34 @@ echo
 mv sudoers /etc/sudoers
 echo "enter username:"
 read NEWUSR
-useradd -m -G wheel $NEWUSR
+useradd -m -G wheel,storage,power,log -s /bin/zsh $NEWUSR
 echo "enter password:"
 passwd $NEWUSR
-#echo "recreating initramfs.. plz b patient"
-#echo
-#mkinitcpio -P
+echo "recreating initramfs.. plz b patient"
+echo
+mkinitcpio -P linux
 echo "done"
 echo
 echo "enabling core functions"
 echo
 systemctl enable sshd systemd-networkd systemd-resolved polkit iwd
 mv nanorc /etc/
-echo "installing yay"
+#echo "installing grub again to be sure"
+#pacman -Sy
+#pacman -S grub
 echo
-mv container /home/$NEWUSR/
+cp -rf container /home/$NEWUSR/
 cd /home/$NEWUSR
 mkdir .config
 mkdir .config/nano
 cp /etc/nanorc .config/nano/
 mv container/nanorc.nanorc /usr/share/nano-syntax-highlighting/
-sudo -u $NEWUSR git clone https://aur.archlinux.org/yay.git
+echo "installing yay"
+sudo -u $NEWUSR git clone git clone https://aur.archlinux.org/yay.git
 cd yay
 sudo -u $NEWUSR makepkg -si --noconfirm
 cd ..
+rm -rf /home/$NEWUSR/container
 #echo "installing dwm, dmenu, ly, and st"
 #echo
 #sudo -u $NEWUSR yay -S --noconfirm ly
@@ -87,16 +93,18 @@ cd ..
 #cd ..
 #end of ugly patch
 #rm -rf container
-echo "installing grub to /boot"
+echo "installing and setting up syslinux"
 echo
-grub-install --target=i386-pc /dev/sda
+syslinux-install_update -i -a -m
+mv container/syslinux /boot/
+mkinitcpio -P linux
 echo "done"
 echo
-echo "creating grub config"
-echo
-grub-mkconfig -o /boot/grub/grub.cfg
-echo "done"
-echo
+#echo "creating grub config"
+#echo
+#grub-mkconfig -o /boot/grub/grub.cfg
+#echo "done"
+#echo
 echo "exiting chroot"
 echo
 exit
