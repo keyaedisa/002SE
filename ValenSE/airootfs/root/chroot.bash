@@ -97,7 +97,7 @@ echo "installing and setting up syslinux"
 echo
 syslinux-install_update -i -a -m
 cd /
-mv container/syslinux /boot/
+cp -r container/syslinux /boot/
 mkinitcpio -P linux
 rm -rf container
 echo "done"
