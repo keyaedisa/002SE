@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="archlinux-baseline"
-iso_label="ARCH_$(date +%Y%m)"
-iso_publisher="Arch Linux <https://archlinux.org>"
-iso_application="Arch Linux baseline"
+iso_name="ValenSEB"
+iso_label="ValenSEB_$(date +%Y%m)"
+iso_publisher="ValenSEB <https://github.com/keyaedisa>"
+iso_application="Valen Server Edition Baseline"
 iso_version="$(date +%Y.%m.%d)"
 install_dir="arch"
 buildmodes=('iso')

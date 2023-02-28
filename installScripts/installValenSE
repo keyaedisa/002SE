@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "welcome 2 valen Server Edition"
+echo "welcome to valen Server Edition"
 echo "with great power like this comes great responsibility.."
 echo "ensure you never fall behind"
 echo "learn all you can"
@@ -20,7 +20,7 @@ case $YN in
 y | yes)
 	kum="0"
 	moreKum="1"
-	echo
+	echo 
 	echo "good. lets begin." && sleep 1.33
 	echo
 	while [ $moreKum != 0 ]; do
@@ -86,9 +86,10 @@ pacstrap /mnt linux-headers
 pacstrap /mnt amd-ucode dialog dosfstools git iw iwd man-db man-pages
 pacstrap /mnt nano openssh polkit reflector texinfo xfsprogs zsh
 #pacstrap /mnt xorg-server xorg-xfontsel xorg-xrandr xorg-xsetroot
-pacstrap /mnt caddy nano-syntax-highlighting syslinux wget
+pacstrap /mnt nano-syntax-highlighting refind wget
 pacstrap /mnt awesome-terminal-fonts gptfdisk powerline-fonts
-pacstrap /mnt zsh-autosuggestions zsh-completions zsh-doc zsh-history-substring-search zsh-lovers
+#pacstrap /mnt zsh-autosuggestions zsh-completions zsh-doc zsh-history-substring-search zsh-lovers
+pacstrap /mnt vnanorc
 echo "done"
 echo
 echo "generating fstab"
@@ -100,11 +101,12 @@ echo "preparing 4 chroot"
 echo
 echo "preparing post install and chroot"
 echo
-cp -r /etc/systemd/network /mnt/
-cp /etc/sudoers /mnt/
+cp -rf /etc/systemd/network /mnt/etc/systemd/
+cp /etc/sudoers /mnt/etc/
 cp /etc/locale.gen /mnt/etc/
-cp -r container /mnt/
-cp /etc/nanorc /mnt/
+cp -rf container /mnt/
+#cp /etc/nanorc /mnt/etc/
+cp /etc/pacman.conf /mnt/etc
 cp chroot.bash /mnt/
 chmod +x /mnt/chroot.bash
 echo "begin chroot"

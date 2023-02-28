@@ -2,6 +2,11 @@
 
 echo "succesful chroot"
 echo
+chsh -s /bin/zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/keyaedisa/Valuca.git ${ZSH_CUSTOM}/themes/Valuca
+cp container/.zshrc ~/
+source ~/.zshrc
 echo "updating time zone and synchronizing system clock"
 echo
 rm -rf /etc/localtime
@@ -22,12 +27,12 @@ echo "ValenSE" >> /etc/hostname
 echo
 echo "setting up networkd"
 echo
-mv network /etc/systemd/
+#mv network /etc/systemd/
 echo "done"
 echo
 echo "setting up sudoers"
 echo
-mv sudoers /etc/sudoers
+#mv sudoers /etc/sudoers
 echo "enter username:"
 read NEWUSR
 useradd -m -G wheel,storage,power,log -s /bin/zsh $NEWUSR
@@ -41,10 +46,12 @@ echo
 echo "enabling core functions"
 echo
 systemctl enable sshd systemd-networkd systemd-resolved polkit iwd
-mv nanorc /etc/
+#mv nanorc /etc/
 #echo "installing grub again to be sure"
 #pacman -Sy
 #pacman -S grub
+pacman -S refind
+refind-install
 echo
 cp -rf container /home/$NEWUSR/
 cd /home/$NEWUSR
@@ -53,7 +60,7 @@ mkdir .config/nano
 cp /etc/nanorc .config/nano/
 cp -rf container/nanorc.nanorc /usr/share/nano-syntax-highlighting/
 echo "installing yay"
-sudo -u $NEWUSR git clone https://aur.archlinux.org/yay.git && sleep 2.0
+sudo -u $NEWUSR git clone https://aur.archlinux.org/yay-bin.git && sleep 2.0
 cd yay/
 sudo -u $NEWUSR makepkg -si --noconfirm
 cd ..
